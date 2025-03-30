@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Game - Virtual Dice Roller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .dice {
+            font-size: 100px;
+        }
+        button, select {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .instructions {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Power Game - Virtual Dice Roller</h1>
+    <p>Roll the dice and test your mathematical power!</p>
+    
+    <label for="dice-sides">Select Dice Sides:</label>
+    <select id="dice-sides">
+        <option value="4">4-sided</option>
+        <option value="6" selected>6-sided</option>
+        <option value="8">8-sided</option>
+        <option value="10">10-sided</option>
+        <option value="12">12-sided</option>
+    </select>
+    <button onclick="rollDice()">Roll Dice</button>
+    
+    <div class="dice-container">
+        <div class="dice" id="dice1">⓿</div>
+        <div class="dice" id="dice2">⓿</div>
+    </div>
+    
+    <div class="instructions">
+        <h2>How to Play: Power Game</h2>
+        <p><strong>Setup:</strong> In groups of more than 3, take turns rolling two dice. The left die determines the base number, and the right die determines the exponent (index/power).</p>
+        
+        <h3>Game 1: Power Duel</h3>
+        <p>Each player rolls twice. Multiply the outcomes and keep them in index form. The player with the highest base and index wins.</p>
+        
+        <h3>Game 2: Power Division</h3>
+        <p>Each player rolls twice. Divide the first outcome by the second and simplify in index form. The player with the lowest base and index wins.</p>
+        
+        <h3>Game 3: Power Chain</h3>
+        <p>Each player rolls twice. The first roll determines the base. The exponents stack: the base is raised to the second number, then raised again to the next roll's number, and finally raised again to the last number. The result should be simplified in index form. The player with the highest base and index wins.</p>
+        
+        <h3>Game 4: Negative Power Challenge</h3>
+        <p>Each player rolls twice. In the first roll, raise the base to the negative of the exponent. In the second roll, do the same and then divide both results. The player with the lowest base and index wins.</p>
+    </div>
+
+    <script>
+        function rollDice() {
+            const diceFaces = {
+                4: ["⓿", "①", "②", "③", "④"],
+                6: ["⓿", "①", "②", "③", "④", "⑤", "⑥"],
+                8: ["⓿", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧"],
+                10: ["⓿", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"],
+                12: ["⓿", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "⑪", "⑫"]
+            };
+            
+            const sides = parseInt(document.getElementById('dice-sides').value);
+            const roll1 = Math.floor(Math.random() * sides) + 1;
+            const roll2 = Math.floor(Math.random() * sides) + 1;
+            
+            document.getElementById('dice1').textContent = diceFaces[sides][roll1] || "⓿";
+            document.getElementById('dice2').textContent = diceFaces[sides][roll2] || "⓿";
+        }
+    </script>
+</body>
+</html>
